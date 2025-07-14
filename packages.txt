@@ -1,2 +1,10 @@
-# packages.txt
+curl
+gnupg
+
+--key-add
+https://dl.google.com/linux/linux_signing_key.pub
+
+--repo-add
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+
 google-chrome-stable

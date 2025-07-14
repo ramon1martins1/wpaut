@@ -1,0 +1,6 @@
+2025/06/11-14:37:14.614 1504 Reusing MANIFEST C:\Ramon\Estudo\WpAut\profile\Default\shared_proto_db/MANIFEST-000001
+2025/06/11-14:37:14.615 1504 Recovering log #3
+2025/06/11-14:37:14.618 1504 Reusing old log C:\Ramon\Estudo\WpAut\profile\Default\shared_proto_db/000003.log 
+2025/06/11-14:37:23.563 1308 Level-0 table #5: started
+2025/06/11-14:37:23.568 1308 Level-0 table #5: 112876 bytes OK
+2025/06/11-14:37:23.570 1308 Delete type=0 #3

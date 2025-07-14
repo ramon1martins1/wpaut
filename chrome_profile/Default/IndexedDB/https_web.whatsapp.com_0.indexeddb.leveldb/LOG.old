@@ -1,0 +1,29 @@
+2025/07/14-09:42:28.096 5e9c Reusing MANIFEST C:\Ramon\Estudo\WpAut\chrome_profile\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/07/14-09:42:28.097 5e9c Recovering log #1805
+2025/07/14-09:42:28.108 5e9c Reusing old log C:\Ramon\Estudo\WpAut\chrome_profile\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/001805.log 
+2025/07/14-09:42:29.963 518c Level-0 table #1818: started
+2025/07/14-09:42:29.972 518c Level-0 table #1818: 257765 bytes OK
+2025/07/14-09:42:29.974 518c Delete type=0 #1805
+2025/07/14-09:42:29.975 2448 Manual compaction at level-0 from ' \x04\x01\x00\x00\x00' @ 72057594037927935 : 1 .. ' \x05\x01\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/07/14-09:42:31.536 2448 Compacting 1@1 + 9@2 files
+2025/07/14-09:42:31.640 2448 Generated table #1819@1: 86929 keys, 2238571 bytes
+2025/07/14-09:42:31.757 2448 Generated table #1820@1: 96131 keys, 2249313 bytes
+2025/07/14-09:42:31.866 2448 Generated table #1821@1: 101373 keys, 2253675 bytes
+2025/07/14-09:42:31.921 2448 Generated table #1822@1: 49646 keys, 2197424 bytes
+2025/07/14-09:42:31.975 2448 Generated table #1823@1: 12809 keys, 2157600 bytes
+2025/07/14-09:42:32.040 2448 Generated table #1824@1: 29515 keys, 2156316 bytes
+2025/07/14-09:42:32.148 2448 Generated table #1825@1: 99418 keys, 2248501 bytes
+2025/07/14-09:42:32.257 2448 Generated table #1826@1: 100155 keys, 2250297 bytes
+2025/07/14-09:42:32.326 2448 Generated table #1827@1: 43111 keys, 972001 bytes
+2025/07/14-09:42:32.326 2448 Compacted 1@1 + 9@2 files => 18723698 bytes
+2025/07/14-09:42:32.327 2448 compacted to: files[ 0 0 9 0 0 0 0 ]
+2025/07/14-09:42:32.328 2448 Delete type=2 #1807
+2025/07/14-09:42:32.328 2448 Delete type=2 #1808
+2025/07/14-09:42:32.328 2448 Delete type=2 #1809
+2025/07/14-09:42:32.329 2448 Delete type=2 #1810
+2025/07/14-09:42:32.329 2448 Delete type=2 #1811
+2025/07/14-09:42:32.329 2448 Delete type=2 #1812
+2025/07/14-09:42:32.329 2448 Delete type=2 #1813
+2025/07/14-09:42:32.329 2448 Delete type=2 #1814
+2025/07/14-09:42:32.329 2448 Delete type=2 #1815
+2025/07/14-09:42:32.329 2448 Delete type=2 #1818

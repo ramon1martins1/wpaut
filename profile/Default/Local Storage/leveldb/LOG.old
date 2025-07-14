@@ -1,0 +1,30 @@
+2025/06/11-14:37:14.564 35e0 Reusing MANIFEST C:\Ramon\Estudo\WpAut\profile\Default\Local Storage\leveldb/MANIFEST-000001
+2025/06/11-14:37:14.608 35e0 Recovering log #65
+2025/06/11-14:37:14.624 35e0 Reusing old log C:\Ramon\Estudo\WpAut\profile\Default\Local Storage\leveldb/000065.log 
+2025/06/11-14:41:15.867 377c Level-0 table #68: started
+2025/06/11-14:41:15.878 377c Level-0 table #68: 17501 bytes OK
+2025/06/11-14:41:15.882 377c Delete type=0 #65
+2025/06/11-14:47:15.867 377c Level-0 table #70: started
+2025/06/11-14:47:15.879 377c Level-0 table #70: 15871 bytes OK
+2025/06/11-14:47:15.882 377c Delete type=0 #67
+2025/06/11-14:52:15.858 377c Level-0 table #72: started
+2025/06/11-14:52:15.864 377c Level-0 table #72: 14196 bytes OK
+2025/06/11-14:52:15.867 377c Delete type=0 #69
+2025/06/11-14:52:15.869 377c Compacting 4@0 + 1@1 files
+2025/06/11-14:52:15.881 377c Generated table #73@0: 225 keys, 11933 bytes
+2025/06/11-14:52:15.882 377c Compacted 4@0 + 1@1 files => 11933 bytes
+2025/06/11-14:52:15.882 377c compacted to: files[ 0 1 0 0 0 0 0 ]
+2025/06/11-14:52:15.883 377c Delete type=2 #62
+2025/06/11-14:52:15.884 377c Delete type=2 #64
+2025/06/11-14:52:15.884 377c Delete type=2 #68
+2025/06/11-14:52:15.884 377c Delete type=2 #70
+2025/06/11-14:52:15.885 377c Delete type=2 #72
+2025/06/11-14:58:15.860 377c Level-0 table #75: started
+2025/06/11-14:58:15.872 377c Level-0 table #75: 20461 bytes OK
+2025/06/11-14:58:15.874 377c Delete type=0 #71
+2025/06/11-15:05:15.857 377c Level-0 table #77: started
+2025/06/11-15:05:15.870 377c Level-0 table #77: 18952 bytes OK
+2025/06/11-15:05:15.872 377c Delete type=0 #74
+2025/06/11-15:12:15.875 377c Level-0 table #79: started
+2025/06/11-15:12:15.885 377c Level-0 table #79: 17349 bytes OK
+2025/06/11-15:12:15.888 377c Delete type=0 #76

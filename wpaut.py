@@ -6,6 +6,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -65,17 +66,24 @@ if "mensagem_padrao" not in st.session_state:
 # Inicializa o driver do Selenium uma vez
 @st.cache_resource
 def get_webdriver():
-    options = webdriver.ChromeOptions()
-    user_data_dir = os.path.join(os.getcwd(), "chrome_profile")
-    #print(f"ChromeDriver instalado em: {user_data_dir}")
-    if not os.path.exists(user_data_dir):
-        os.makedirs(user_data_dir)
+    # Configura as opções do Chrome para rodar no Streamlit Cloud
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920,1080")
+
+    # Caminho para o perfil do Chrome (essencial para manter a sessão do WhatsApp)
+    # Usar /tmp/ é a prática correta em ambientes Linux como o Streamlit Cloud
+    user_data_dir = os.path.join("/tmp", "chrome_profile")
     options.add_argument(f"--user-data-dir={user_data_dir}")
     options.add_argument("--profile-directory=Default")
+
+    # Inicializa o driver do Chrome usando os executáveis já disponíveis no ambiente
+    # do Streamlit Cloud. Não usamos mais o ChromeDriverManager.
+    driver = webdriver.Chrome(service=Service(), options=options)
     
-    service = Service(ChromeDriverManager().install())
-    print(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=options)
     return driver
 
 def formatar_para_whatsapp(texto):

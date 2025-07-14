@@ -51,11 +51,11 @@ if not chrome_is_installed:
 
     try:
         # Torna o script de instalação executável
-        subprocess.run(["chmod", "+x", "setup.sh"], check=True)
+        #subprocess.run(["chmod", "+x", "setup.sh"], check=True)
         
         # Executa o script de instalação e captura a saída
         result = subprocess.run(
-            ["./setup.sh"], 
+            ["bash", "setup.sh"], 
             capture_output=True, 
             text=True,
             check=True # Faz com que um erro no script lance uma exceção

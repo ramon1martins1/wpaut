@@ -1,30 +1,3 @@
-# ===== FIX OBRIGATÓRIO - DEVE SER AS PRIMEIRAS LINHAS =====
-import sys
-import os
-
-if getattr(sys, 'frozen', False):
-    # Patch completo para metadados
-    import importlib.metadata
-    import types
-    
-    class FakeDistribution(types.SimpleNamespace):
-        def locate_file(self, path):
-            return os.path.join(sys._MEIPASS, path)
-    
-    def _fixed_distribution(name):
-        if name == 'streamlit':
-            return FakeDistribution(
-                version='1.22.0',
-                read_text=lambda _: "",
-                files=lambda: []
-            )
-        raise importlib.metadata.PackageNotFoundError(name)
-    
-    importlib.metadata.distribution = _fixed_distribution
-    os.environ['STREAMLIT_RUNNING_IN_PYINSTALLER'] = '1'
-    os.environ['STREAMLIT_SERVER_PORT'] = '8501'
-# ===== FIM DO FIX =====
-
 import streamlit as st
 import urllib.parse
 import time
@@ -39,23 +12,28 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import datetime
+import json
 import re
+import sys
+import os
 from PIL import Image
 
-def check_password():
-    # Mostra um input para senha
-    password = st.text_input("Digite a senha:", type="password")
-    
-    # Verifica se a senha está correta (comparando com st.secrets)
-    if password == st.secrets["SENHA_APP"]:
-        return True
-    elif password != "":
-        st.error("Senha incorreta!")  # Mensagem de erro
-    return False
+#def check_password():
+#    # Verifica se a senha existe nos segredos
+#    if "SENHA_APP" not in st.secrets:
+#        st.error("Erro de configuração: SENHA_APP não definida")
+#        st.stop()
+#        
+#    password = st.text_input("Digite a senha:", type="password")
+#    if password == st.secrets["SENHA_APP"]:
+#        return True
+#    elif password:
+#        st.error("Senha incorreta!")
+#    return False
 
 # Bloqueia o app se a senha estiver errada
-if not check_password():
-    st.stop()  # Interrompe a execução aqui
+#if not check_password():
+#    st.stop()  # Interrompe a execução aqui
 
 # Se a senha estiver correta, o resto do app carrega
 st.title("App Privado 🔒")
@@ -217,18 +195,35 @@ if st.sidebar.button("Salvar configurações"):
     st.sidebar.success("Configurações salvas!")
 
 # === AUTENTICAÇÃO COM GOOGLE SHEETS ===
+import streamlit as st
+from oauth2client.service_account import ServiceAccountCredentials
+import gspread
+
 def carregar_contatos(link):
     try:
         scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-        creds = ServiceAccountCredentials.from_json_keyfile_dict(st.secrets["gcp_service_account"], scope)        
+
+        # Esta é a forma correta de verificar se os secrets existem e usá-los.
+        # Se st.secrets["google_credentials"] não existir, ele vai pular para o 'except'.
+        try:
+            # Tenta usar os secrets do Streamlit (funciona na nuvem e localmente com secrets.toml )
+            creds_json = dict(st.secrets["google_credentials"])
+            creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
+        except (KeyError, FileNotFoundError):
+            # Se falhar, tenta usar o arquivo local (bom para um fallback rápido)
+            st.warning("Credenciais não encontradas nos secrets. Tentando usar 'credenciais.json' localmente.")
+            creds = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json", scope)
+
         client = gspread.authorize(creds)
         planilha_id = link.split("/d/")[1].split("/")[0]
         planilha = client.open_by_key(planilha_id)
         abas = planilha.worksheets()
         return planilha, [a.title for a in abas]
+
     except Exception as e:
         st.error(f"Erro ao carregar planilha: {e}")
         return None, []
+
 
 planilha, abas = carregar_contatos(link_planilha)
 

@@ -18,8 +18,11 @@ import re
 import sys
 import os
 import shutil
+import subprocess # Importe a biblioteca de subprocessos
 from PIL import Image
 
+if not os.path.exists("/tmp/setup_done.flag"):
+    st.write("Primeira inicialização: Configurando o ambiente, por favor aguarde...")
 #def check_password():
 #    # Verifica se a senha existe nos segredos
 #    if "SENHA_APP" not in st.secrets:
@@ -65,7 +68,8 @@ if "mensagem_padrao" not in st.session_state:
 
 # Inicializa o driver do Selenium uma vez
 @st.cache_resource
-def get_webdriver():
+@st.cache_resource
+def get_webdriver( ):
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
@@ -73,16 +77,14 @@ def get_webdriver():
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920,1080")
 
-    # Caminho para o perfil do Chrome
     user_data_dir = os.path.join("/tmp", "chrome_profile")
     options.add_argument(f"--user-data-dir={user_data_dir}")
     options.add_argument("--profile-directory=Default")
 
-    # Inicializa o driver usando o Service() vazio para que o Selenium
-    # encontre o chromedriver no PATH do sistema.
     driver = webdriver.Chrome(service=Service(), options=options)
     
     return driver
+
 
 def formatar_para_whatsapp(texto):
     # Ordem CRÍTICA das substituições

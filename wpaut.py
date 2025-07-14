@@ -16,6 +16,7 @@ import json
 import re
 import sys
 import os
+import shutil
 from PIL import Image
 
 #def check_password():

@@ -20,8 +20,8 @@ import shutil
 import subprocess # Importe a biblioteca de subprocessos
 from PIL import Image
 
-if not os.path.exists("/tmp/setup_done.flag"):
-    st.write("Primeira inicialização: Configurando o ambiente, por favor aguarde...")
+#if not os.path.exists("/tmp/setup_done.flag"):
+#    st.write("Primeira inicialização: Configurando o ambiente, por favor aguarde...")
 #def check_password():
 #    # Verifica se a senha existe nos segredos
 #    if "SENHA_APP" not in st.secrets:
@@ -40,8 +40,42 @@ if not os.path.exists("/tmp/setup_done.flag"):
 #    st.stop()  # Interrompe a execução aqui
 
 # Se a senha estiver correta, o resto do app carrega
-st.title("App Privado 🔒")
-st.write("Bem-vindo ao conteúdo restrito!")
+#st.title("App Privado 🔒")
+#st.write("Bem-vindo ao conteúdo restrito!")
+
+chrome_is_installed = shutil.which("google-chrome")
+
+if not chrome_is_installed:
+    st.warning("O Google Chrome não foi encontrado. Iniciando a instalação...")
+    st.info("Isso pode levar um minuto. O aplicativo será recarregado automaticamente.")
+
+    try:
+        # Torna o script de instalação executável
+        subprocess.run(["chmod", "+x", "setup.sh"], check=True)
+        
+        # Executa o script de instalação e captura a saída
+        result = subprocess.run(
+            ["./setup.sh"], 
+            capture_output=True, 
+            text=True,
+            check=True # Faz com que um erro no script lance uma exceção
+        )
+        
+        # Exibe o log de instalação para depuração
+        st.code(result.stdout)
+        st.success("Google Chrome instalado com sucesso!")
+        
+        # Força o recarregamento do aplicativo para aplicar as mudanças
+        st.rerun()
+
+    except subprocess.CalledProcessError as e:
+        # Se o script falhar, exibe o erro detalhado e para a execução
+        st.error("Ocorreu um erro durante a instalação do Chrome.")
+        st.code(f"Código de Saída: {e.returncode}\nstdout: {e.stdout}\nstderr: {e.stderr}")
+        st.stop()
+    except FileNotFoundError:
+        st.error("Erro crítico: O arquivo 'setup.sh' não foi encontrado.")
+        st.stop()
 
 st.set_page_config(page_title="WpAut", page_icon=":zap:", layout="wide")
 #st.set_option('server.enableCORS', False)

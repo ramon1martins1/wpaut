@@ -66,7 +66,6 @@ if "mensagem_padrao" not in st.session_state:
 # Inicializa o driver do Selenium uma vez
 @st.cache_resource
 def get_webdriver():
-    # Configura as opções do Chrome para rodar no Streamlit Cloud
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
@@ -74,14 +73,13 @@ def get_webdriver():
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920,1080")
 
-    # Caminho para o perfil do Chrome (essencial para manter a sessão do WhatsApp)
-    # Usar /tmp/ é a prática correta em ambientes Linux como o Streamlit Cloud
+    # Caminho para o perfil do Chrome
     user_data_dir = os.path.join("/tmp", "chrome_profile")
     options.add_argument(f"--user-data-dir={user_data_dir}")
     options.add_argument("--profile-directory=Default")
 
-    # Inicializa o driver do Chrome usando os executáveis já disponíveis no ambiente
-    # do Streamlit Cloud. Não usamos mais o ChromeDriverManager.
+    # Inicializa o driver usando o Service() vazio para que o Selenium
+    # encontre o chromedriver no PATH do sistema.
     driver = webdriver.Chrome(service=Service(), options=options)
     
     return driver

@@ -42,6 +42,25 @@ import datetime
 import re
 from PIL import Image
 
+def check_password():
+    # Mostra um input para senha
+    password = st.text_input("Digite a senha:", type="password")
+    
+    # Verifica se a senha está correta (comparando com st.secrets)
+    if password == st.secrets["SENHA_APP"]:
+        return True
+    elif password != "":
+        st.error("Senha incorreta!")  # Mensagem de erro
+    return False
+
+# Bloqueia o app se a senha estiver errada
+if not check_password():
+    st.stop()  # Interrompe a execução aqui
+
+# Se a senha estiver correta, o resto do app carrega
+st.title("App Privado 🔒")
+st.write("Bem-vindo ao conteúdo restrito!")
+
 st.set_page_config(page_title="WpAut", page_icon=":zap:", layout="wide")
 #st.set_option('server.enableCORS', False)
 #st.set_option('server.enableXsrfProtection', False)

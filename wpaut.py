@@ -102,19 +102,27 @@ if "mensagem_padrao" not in st.session_state:
 # Inicializa o driver do Selenium uma vez
 @st.cache_resource
 @st.cache_resource
-def get_webdriver( ):
-    options = Options()
-    options.add_argument("--headless")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--window-size=1920,1080")
+def get_webdriver():
+    options = uc.ChromeOptions()
+    # As opções headless e de segurança ainda são necessárias
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--window-size=1920,1080')
 
+    # Caminho para o perfil do Chrome (essencial para manter a sessão do WhatsApp)
     user_data_dir = os.path.join("/tmp", "chrome_profile")
-    options.add_argument(f"--user-data-dir={user_data_dir}")
-    options.add_argument("--profile-directory=Default")
+    options.add_argument(f'--user-data-dir={user_data_dir}')
+    options.add_argument('--profile-directory=Default')
 
-    driver = webdriver.Chrome(service=Service(), options=options)
+    # A biblioteca 'undetected_chromedriver' gerencia o download e a execução
+    # do driver e do navegador de forma automática e sem necessidade de sudo.
+    driver = uc.Chrome(
+        options=options,
+        driver_executable_path=None, # Deixa a biblioteca gerenciar
+        version_main=108 # Fixa uma versão estável do Chromium
+    )
     
     return driver
 
